@@ -1,0 +1,94 @@
+<hr />
+<?php
+$this->headLink()->appendStylesheet('//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css');
+$this->headLink()->appendStylesheet('//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css');
+
+$this->inlineScript()->appendFile('//cdn.datatables.net/1.10.4/js/jquery.dataTables.js');
+
+$this->inlineScript()->appendFile('//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js');
+?>
+
+<div id="welcome">
+	<h4>Mes experiences professionnel</h4>
+    <hr />
+	 <a href="<?= $this->url(array(),'progressAdd')?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"> Ajouter</span></a>
+	<hr />
+	<?= count($this->messages) ? '<p>'.implode('<br>', $this->messages).'</p>' : ''?>
+	<table id="id_table" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>Poste Occupé</th>
+				<th>Date début - Date fin</th>
+				<th>Société</th>
+				<th>Lieu</th>
+				<th>Déscription</th>
+				<th>Technologies utilisées</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php 
+		  foreach ($this->profs as $prof){ ?>
+		<tr>
+				<td><?= $prof->getTitle()?></td>
+				<td><?= $prof->getDateOfStart()?> / <?= $prof->getDateOfEnd()?></td>
+				<td><?= $prof->getCompany()?></td>
+				<td><?= $prof->getPlace()?></td>
+				<td><?= $prof->getDes()?></td>
+				<td><?= $prof->getTechno()?></td>
+				<td>
+				    <a href="<?= $this->url(array('id' => $prof->getId()),'progressEdit')?>"class="btn btn-success"><span class="glyphicon glyphicon-edit"> </span></a>
+				    <a href="<?= $this->url(array('id' => $prof->getId()),'progressDelete')?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+				</td>
+			</tr>
+		<?php  }  ?>
+    </tbody>
+	</table>
+</div>
+<div id="welcome">
+   <hr />
+	<h4>Mes formations</h4>
+    <hr />
+	 <a href="<?= $this->url(array(),'progressAdd')?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"> Nouvel formation</span></a>
+	<hr />
+	<table id="id_table1" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>Intitulé </th>
+				<th>Date début - Date fin</th>
+				<th>Etablissement</th>
+				<th>Lieu</th>
+				<th>Déscription</th>
+				<th>Technologies acquis</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php 
+		  foreach ($this->forms as $form){ ?>
+		<tr>
+				<td><?= $form->getTitle()?></td>
+				<td><?= $form->getDateOfStart()?> / <?= $form->getDateOfEnd()?></td>
+				<td><?= $form->getCompany()?></td>
+				<td><?= $form->getPlace()?></td>
+				<td><?= $form->getDes()?></td>
+				<td><?= $form->getTechno()?></td>
+				<td>
+				    <a href="<?= $this->url(array('id' => $form->getId()),'progressEdit')?>"class="btn btn-success"><span class="glyphicon glyphicon-edit"></span></a>
+				    <a href="<?= $this->url(array('id' => $form->getId()),'progressDelete')?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+				</td>
+			</tr>
+		<?php  }  ?>
+    </tbody>
+	</table>
+</div>
+<script type="text/javascript">
+<?php $this->inlineScript()->captureStart()?>
+$(document).ready( function () {
+    $('#id_table').DataTable();
+    $('#id_table1').DataTable();
+    
+} );
+<?php $this->inlineScript()->captureEnd()?>
+</script>
+

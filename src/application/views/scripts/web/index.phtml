@@ -1,1 +1,16 @@
-TODO Page WebIndex
+<?php if(0 === count($this->webs)) {?>
+<p class="lead">Aucune Webographie</p>
+<?php } else {?>
+  <?= $this->partialLoop('web/partials/item-index.phtml', $this->webs)?>
+<?php }?>
+<?php /*?>
+<?php $this->headStyle('/assets/contentflow.css')?>
+<?php $this->inlineScript(Zend_View_Helper_InlineScript::FILE, '/assets/jqueryui/jquery-ui.min.js')?>
+<?php $this->inlineScript(Zend_View_Helper_InlineScript::FILE, '/assets/ContentFlow/contentflow.js')?>
+
+<?php $this->inlineScript()->captureStart()?>
+$(function() {
+    $('#preview-coverflow').coverflow();
+});
+<?php $this->inlineScript()->captureEnd()?>
+*/ ?>

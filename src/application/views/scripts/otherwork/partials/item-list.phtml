@@ -1,0 +1,16 @@
+<tr>
+	<td><?= $this->id?></td>
+	<td><img src="/img/<?php echo $this->picture;?>"
+		style="width: 64px; height: 64px; border: none;" /></td>
+	<td><?= $this->name?></td>
+	<td><?= $this->techno?></td>
+	<td><?= $this->description?></td>
+	<td><?= $this->link?></td>
+	<td><a
+		href="<?= $this->url(array('id' => $this->id), 'otherWorkEdit')?>"
+		class="btn btn-xs btn-success"><span
+			class="glyphicon glyphicon-pencil"></span> Editer</a> <a
+		href="<?= $this->url(array('id' => $this->id), 'otherWorkDelete')?>"
+		class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span>
+			Supprimer</a></td>
+</tr>

@@ -1,0 +1,14 @@
+<?php 
+
+$this->inlineScript()->appendFile("/../public/assets/jquery.coverflow.js");
+$this->inlineScript()->appendFile("/../public/assets/jquery-ui.js");
+?>
+<?= $this->form?>
+
+<script>
+<?php $this->inlineScript()->captureStart() ?>
+$(function() {
+    $('.coverflow').coverflow();
+});
+<?php $this->inlineScript()->captureEnd() ?>
+</script>

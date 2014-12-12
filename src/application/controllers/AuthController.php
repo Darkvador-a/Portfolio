@@ -4,8 +4,15 @@ class AuthController extends Zend_Controller_Action
 {
     protected $auth;
     
+    protected $userAuth;
+    
     public function init(){
         $this->auth = Zend_Auth::getInstance();
+        if($this->auth->hasIdentity()){
+            $this->userAuth = $this->auth->getIdentity();
+        } else {
+            $this->userAuth = new Model_User();
+        }
     }
     
     public function indexAction(){
@@ -42,6 +49,12 @@ class AuthController extends Zend_Controller_Action
                     $service = new Service_User();
                     $user = $service->authenticate($adapter->getResultRowObject(null, Model_DbTable_User::COL_PASSWORD));
                     
+                    if($user->getId() == 1){
+                        $user->setRoleId('admin');
+                    } else {
+                        $user->setRoleId('curious');
+                    }
+                    
                     $storage->write($user);
                 }
 
@@ -59,6 +72,7 @@ class AuthController extends Zend_Controller_Action
     }
     
     public function logoutAction(){
+        
         $this->_helper->viewRenderer->setNoRender(TRUE);
         
         $this->view->priorityMessenger('Disconnect.', 'success');
